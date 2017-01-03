@@ -33,11 +33,11 @@ public class Parseator {
 				Element e = (Element)next;
 				
 				if(e.getNodeName().equals("server-host")){
-					ctx.setServer_host(e.getFirstChild().getNodeName());
+					ctx.setServer_host(e.getTextContent());
 				}else if(e.getNodeName().equals("server-port")){
-					ctx.setServer_port(e.getFirstChild().getNodeName());
+					ctx.setServer_port(e.getTextContent());
 				}else if(e.getNodeName().equals("download-dir")){
-					ctx.setDownload_dir(e.getFirstChild().getNodeName());
+					ctx.setDownload_dir(e.getTextContent());
 				}
 			}	
 		}

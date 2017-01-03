@@ -4,7 +4,7 @@ package ie.gmit.sw.client;
  * method only
  */
 public class Context {
-	public static final String CON_FILE="oop/src/ie/gmit/sw/client/config.xml";
+	public static final String CON_FILE="src/ie/gmit/sw/client/conf.xml";
 	private String username;
 	private String server_host;
 	private String server_port;
@@ -44,6 +44,12 @@ public class Context {
 
 	public void setDownload_dir(String download_dir) {
 		this.download_dir = download_dir;
+	}
+
+	@Override
+	public String toString() {
+		return "Context [username=" + username + ", server_host=" + server_host + ", server_port=" + server_port
+				+ ", download_dir=" + download_dir + "]";
 	}
 	
 	
