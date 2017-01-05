@@ -7,6 +7,8 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
+import java.util.Calendar;
+import java.util.Date;
 
 class ClientServiceThread extends Thread {
 
@@ -41,7 +43,12 @@ class ClientServiceThread extends Thread {
 					+ clientSocket.getInetAddress().getHostName());
 			sendMessage("Connection successful");
 
-			askOperation();
+			try {
+				askOperation();
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -62,7 +69,7 @@ class ClientServiceThread extends Thread {
 		}
 	}
 
-	void askOperation() throws IOException, ClassNotFoundException {
+	void askOperation() throws IOException, ClassNotFoundException, InterruptedException {
 		while (true) {
 			message = (String) in.readObject();
 			if (message.equals("list")) {
@@ -74,7 +81,7 @@ class ClientServiceThread extends Thread {
 		}
 	}
 
-	void downloadFile() throws IOException, ClassNotFoundException {
+	void downloadFile() throws IOException, ClassNotFoundException, InterruptedException {
 		String signal = "no"; // check whether the file client need is exist
 		String fileName;
 		while (true) {
@@ -98,7 +105,9 @@ class ClientServiceThread extends Thread {
 		sendFile(fileName);
 	}
 
-	void sendFile(String filename) throws IOException {
+	void sendFile(String filename) throws IOException, InterruptedException, ClassNotFoundException {
+		addLog();
+		writeLog();
 		int length = 0;
 		byte[] sendByte = null;
 		DataOutputStream dout = null;
@@ -114,6 +123,24 @@ class ClientServiceThread extends Thread {
 		}
 		fin.close();
 		dout.close();
+	}
+	
+	void addLog() throws IOException, InterruptedException, ClassNotFoundException{
+		Request r = new Request();
+		r.setCommand("Listing");
+		message = (String) in.readObject();
+		r.setHost(message);
+		Calendar ca = Calendar.getInstance();//get current time
+		Date date = ca.getTime();
+		r.setD(date);
+		Runner.q.add(r);
+		
+	}
+	
+	void writeLog() throws IOException, InterruptedException{
+		Logger log = new Logger(Runner.q);
+		log.run(); // add log
+		
 	}
 
 	void getList() {

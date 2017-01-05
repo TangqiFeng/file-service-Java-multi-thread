@@ -162,6 +162,7 @@ public class Connection {
 	void receiveFile() throws IOException {
 		byte[] inputByte = null;
 		int length = 0;
+		sendMessage(requestSocket.getInetAddress().getHostAddress());
 		try {
 
 			FileOutputStream fout = new FileOutputStream(new File(ctx.getDownload_dir() + in.readUTF()));
