@@ -21,6 +21,10 @@ public class Connection {
 	Boolean flag = true;
 
 	public void run() throws Throwable {
+		// get context object from conf.xml
+		p = new Parseator(new Context());
+		p.init();
+		ctx = p.getCtx();
 		try {
 			while (flag) {
 				System.out.println("1. Connect to Server");
@@ -92,13 +96,10 @@ public class Connection {
 
 	void connection() throws Throwable {
 		try {
-
-			// get context object from conf.xml
-			p = new Parseator(new Context());
-			p.init();
-			ctx = p.getCtx();
 			System.out.println("Please Enter your IP Address");
 			String ipaddress = cin.getString();
+
+			
 			// 1. creating a socket to connect to the server
 			requestSocket = new Socket(ipaddress, 7777);
 			System.out.println("Connected to " + ipaddress + " 7777");
