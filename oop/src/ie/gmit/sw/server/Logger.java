@@ -18,8 +18,12 @@ public class Logger {
 	
 	void run() throws IOException, InterruptedException{
 		Request r = (Request) q.take();
-		fw.write("\n" + r.toString() + "\n");
-		fw.close();
+		if(r instanceof PoisonRequest){
+			;
+		}else{
+			fw.write("\n" + r.toString() + "\n");
+			fw.close();
+		}
 	}
 	
 }

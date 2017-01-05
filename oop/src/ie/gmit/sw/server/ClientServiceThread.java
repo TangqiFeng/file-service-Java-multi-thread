@@ -134,7 +134,7 @@ class ClientServiceThread extends Thread {
 		Date date = ca.getTime();
 		r.setD(date);
 		Runner.q.add(r);
-		
+		// if want to interrupt the 
 	}
 	
 	void writeLog() throws IOException, InterruptedException{
