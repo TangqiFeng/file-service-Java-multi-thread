@@ -1,5 +1,9 @@
 package ie.gmit.sw.client;
-
+/**
+ * This class include main method (client)
+ * @author kyle
+ *
+ */
 
 public class Runner {
 	

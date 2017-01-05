@@ -9,7 +9,13 @@ import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.util.Calendar;
 import java.util.Date;
-
+/**
+ * this class includes main functions(as methods) in server-side
+ * provide solutions if get requests from clients.(one thread response one client's requests)
+ * and record info append to a .txt file if a client download a file
+ * @author kyle
+ *
+ */
 class ClientServiceThread extends Thread {
 	String Path;
 
@@ -23,7 +29,10 @@ class ClientServiceThread extends Thread {
 		clientSocket = s;
 		clientID = i;
 	}
-
+/**
+ * the message send to client
+ * @param msg
+ */
 	void sendMessage(String msg) {
 		try {
 			out.writeObject(msg);

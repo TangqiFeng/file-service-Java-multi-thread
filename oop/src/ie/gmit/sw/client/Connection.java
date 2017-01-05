@@ -7,9 +7,14 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.net.UnknownHostException;
-
+/**
+ * this class includes main functions(as methods) in client-side
+ * @author kyle
+ *
+ */
 public class Connection {
 	String ss = null; // ignore repeat connection
+	//get connection
 	Socket requestSocket;
 	ObjectOutputStream out;
 	ObjectInputStream in;
@@ -18,8 +23,8 @@ public class Connection {
 	String message = ""; // store received message
 	UI cin = new UI(); // input from keyboard
 	String s = ""; // input String from keyboard
-	Boolean flag = true;
-
+	Boolean flag = true; // used to control the loop until logout
+	
 	public void run() throws Throwable {
 		// get context object from conf.xml
 		p = new Parseator(new Context());
@@ -34,6 +39,7 @@ public class Connection {
 				System.out.println();
 				System.out.println("Type Option [1-4]>");
 				s = cin.getString();
+				// if input wrong, then retry (loop) 
 				while (true) {
 					if (s.equals("1")) {
 						if (ss == null) {
