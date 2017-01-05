@@ -97,10 +97,11 @@ public class Connection {
 			p = new Parseator(new Context());
 			p.init();
 			ctx = p.getCtx();
-			String ipaddress = ctx.getServer_host();
+			System.out.println("Please Enter your IP Address");
+			String ipaddress = cin.getString();
 			// 1. creating a socket to connect to the server
 			requestSocket = new Socket(ipaddress, 7777);
-			System.out.println("Connected to " + ipaddress + " in port 2004");
+			System.out.println("Connected to " + ipaddress + " 7777");
 			System.out.println();
 			// 2. get Input and Output streams
 			out = new ObjectOutputStream(requestSocket.getOutputStream());

@@ -13,7 +13,7 @@ public class Runner {
 		@SuppressWarnings("resource")
 		String port = args[0];
 		String path = args[1];
-		ServerSocket m_ServerSocket = new ServerSocket(Integer.parseInt(port) , 100 , InetAddress.getByName ("127.0.0.1") );
+		ServerSocket m_ServerSocket = new ServerSocket(Integer.parseInt(port),10 );
 		int id = 0;
 		while (true) {
 			Socket clientSocket = m_ServerSocket.accept();
