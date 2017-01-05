@@ -11,11 +11,14 @@ public class Runner {
 	
 	public static void main(String[] args) throws Exception {
 		@SuppressWarnings("resource")
-		ServerSocket m_ServerSocket = new ServerSocket(7777, 100 , InetAddress.getByName ("127.0.0.1") );
+		String port = args[0];
+		String path = args[1];
+		ServerSocket m_ServerSocket = new ServerSocket(Integer.parseInt(port) , 100 , InetAddress.getByName ("127.0.0.1") );
 		int id = 0;
 		while (true) {
 			Socket clientSocket = m_ServerSocket.accept();
 			ClientServiceThread cliThread = new ClientServiceThread(clientSocket, id++);
+			cliThread.setPath(path);
 			cliThread.start();
 
 		}

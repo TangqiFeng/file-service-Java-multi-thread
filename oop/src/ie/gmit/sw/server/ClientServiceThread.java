@@ -11,6 +11,7 @@ import java.util.Calendar;
 import java.util.Date;
 
 class ClientServiceThread extends Thread {
+	String Path;
 
 	Socket clientSocket;
 	String message;
@@ -86,7 +87,7 @@ class ClientServiceThread extends Thread {
 		String fileName;
 		while (true) {
 			fileName = (String) in.readObject();
-			String[] str = new File("src//ie//gmit//sw//server//files//"
+			String[] str = new File(Path
 					+ File.separator).list();
 			for (int i = 0; i < str.length; i++) {
 				if (str[i].equals(fileName)) {
@@ -113,7 +114,7 @@ class ClientServiceThread extends Thread {
 		DataOutputStream dout = null;
 		FileInputStream fin = null;
 		dout = new DataOutputStream(out);
-		File file = new File("src//ie//gmit//sw//server//files//"+filename);
+		File file = new File(Path+filename);
 		fin = new FileInputStream(file);
 		sendByte = new byte[1024];
 		dout.writeUTF(file.getName());
@@ -144,7 +145,7 @@ class ClientServiceThread extends Thread {
 	}
 
 	void getList() {
-		String[] str = new File("src//ie//gmit//sw//server//files//"
+		String[] str = new File(Path
 				+ File.separator).list();
 		sendMessage(str.length + "");
 		for (int i = 0; i < str.length; i++) {
@@ -153,4 +154,13 @@ class ClientServiceThread extends Thread {
 		}
 	}
 
+	public String getPath() {
+		return Path;
+	}
+
+	public void setPath(String path) {
+		Path = path;
+	}
+
+	
 }
